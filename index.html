@@ -258,14 +258,14 @@
      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-     ym(XXXXXXXX, "init", {
+     ym(109396293, "init", {
           clickmap:true,
           trackLinks:true,
           accurateTrackBounce:true,
           webvisor:true
      });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109396293" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
 </head>
 <body>
@@ -433,5 +433,19 @@
     });
   </script>
 
+<script>
+  // Цель: клик по главной кнопке CTA
+  document.querySelectorAll('.btn, .btn-large').forEach(btn => {
+    btn.addEventListener('click', function() {
+      ym(109396293, 'reachGoal', 'click_cta');
+    });
+  });
+
+  // Цель: отправка формы
+  document.getElementById('orderForm').addEventListener('submit', function() {
+    ym(109396293, 'reachGoal', 'form_submit');
+  });
+</script>
+ 
 </body>
 </html>
