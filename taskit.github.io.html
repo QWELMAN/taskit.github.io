@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TaskIT — Найди ИТ-фрилансера за 5 минут</title>
+  <meta name="description" content="TaskIT — платформа для мгновенного подбора проверенных ИТ-фрилансеров под микрозадачи. Гарантия результата. Безопасная сделка."/>
+  <style>
+    /* === СБРОС И БАЗОВЫЕ СТИЛИ === */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .btn {
+      display: inline-block;
+      background: #4361ee;
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: #3a56d4; }
+    .btn-large { padding: 18px 40px; font-size: 18px; }
+    .section { padding: 80px 0; }
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 50px;
+    }
+
+    /* === HEADER === */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #4361ee;
+    }
+    .logo span { color: #333; }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: #4361ee; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* === HERO === */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 100px 0;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.95;
+    }
+    .hero-sub {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+    }
+    .btn-outline:hover { background: #fff; color: #667eea; }
+
+    /* === BENEFITS === */
+    .benefits { background: #f8f9fa; }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .benefit-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .benefit-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .benefit-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .benefit-card p { color: #666; font-size: 15px; }
+
+    /* === HOW IT WORKS === */
+    .steps { }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      text-align: center;
+    }
+    .step { padding: 20px; }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: #4361ee;
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .step h4 { font-size: 18px; margin-bottom: 10px; }
+    .step p { color: #666; font-size: 14px; }
+
+    /* === FORM === */
+    .cta-section {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: #fff;
+      text-align: center;
+    }
+    .cta-section .section-title { color: #fff; }
+    .cta-section .section-subtitle { color: rgba(255,255,255,0.9); }
+    .form-box {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      color: #333;
+    }
+    .form-group { margin-bottom: 20px; text-align: left; }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #4361ee;
+      outline: none;
+    }
+    .form-note {
+      font-size: 13px;
+      color: #888;
+      margin-top: 12px;
+    }
+
+    /* === TRUST === */
+    .trust { background: #f8f9fa; }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .trust-card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      border-left: 4px solid #4361ee;
+    }
+    .trust-card h4 { margin-bottom: 8px; font-size: 18px; }
+    .trust-card p { color: #666; font-size: 14px; }
+    .guarantee-badge {
+      text-align: center;
+      padding: 20px;
+      background: #e8f4fd;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+    .guarantee-badge strong { color: #4361ee; }
+
+    /* === FOOTER === */
+    footer {
+      background: #1a1a2e;
+      color: #ccc;
+      padding: 40px 0 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    footer a { color: #fff; }
+    .footer-links { margin-bottom: 20px; }
+    .footer-links a { margin: 0 12px; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 18px; }
+      .section { padding: 60px 0; }
+      .section-title { font-size: 26px; }
+      .btn-large { width: 100%; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+  <!-- 🔹 Место для Яндекс.Метрики (вставьте код после регистрации) -->
+  <!-- Yandex.Metrika counter -->
+  <!-- <script type="text/javascript"> ... </script> -->
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">Task<span>IT</span></a>
+      <nav class="nav-links">
+        <a href="#benefits">Преимущества</a>
+        <a href="#how">Как работает</a>
+        <a href="#trust">Гарантии</a>
+        <a href="#form" class="btn" style="padding:8px 20px;font-size:14px;">Разместить задачу</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Найдите ИТ-фрилансера для микрозадачи за 5 минут</h1>
+      <p>TaskIT — платформа для мгновенного подбора проверенных исполнителей: верстка, настройка рекламы, исправление багов и другие задачи до 3 часов.</p>
+      <p class="hero-sub">⚡ Мгновенный подбор &nbsp;•&nbsp; 🛡️ Гарантия возврата &nbsp;•&nbsp; 💬 Безопасная сделка</p>
+      <div class="hero-buttons">
+        <a href="#form" class="btn btn-large">Разместить задачу бесплатно</a>
+        <a href="#how" class="btn btn-large btn-outline">Как это работает</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits" class="section benefits">
+    <div class="container">
+      <h2 class="section-title">Почему выбирают TaskIT</h2>
+      <p class="section-subtitle">Мы убрали всё лишнее, чтобы вы получили результат быстро и без рисков</p>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <h3>Мгновенный подбор</h3>
+          <p>Алгоритм находит подходящего фрилансера за 2–5 минут. Не нужно листать сотни профилей.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🛡️</div>
+          <h3>Гарантия результата</h3>
+          <p>Если работа не устроит — вернём деньги. Оплата переводится исполнителю только после вашего подтверждения.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3>Прозрачные цены</h3>
+          <p>Фиксированная комиссия 15%. Никаких скрытых платежей. Задачи от 1 000 ₽.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section steps">
+    <div class="container">
+      <h2 class="section-title">Как это работает</h2>
+      <p class="section-subtitle">Всего 3 простых шага до решения вашей задачи</p>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Опишите задачу</h4>
+          <p>Заполните короткую форму: что нужно сделать, сроки, бюджет.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Получите исполнителя</h4>
+          <p>Система подберёт проверенного фрилансера с подходящим опытом.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Примите работу</h4>
+          <p>Общайтесь в чате, проверяйте результат, подтверждайте оплату.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FORM -->
+  <section id="form" class="section cta-section">
+    <div class="container">
+      <h2 class="section-title">Готовы решить задачу?</h2>
+      <p class="section-subtitle">Оставьте заявку — мы свяжемся с вами в течение 15 минут</p>
+      <div class="form-box">
+        <form id="orderForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Ваше имя *</label>
+            <input type="text" id="name" name="name" required placeholder="Иван">
+          </div>
+          <div class="form-group">
+            <label for="contact">Email или телефон *</label>
+            <input type="text" id="contact" name="contact" required placeholder="example@mail.ru или +7 (999) 123-45-67">
+          </div>
+          <div class="form-group">
+            <label for="task">Кратко о задаче *</label>
+            <textarea id="task" name="task" rows="4" required placeholder="Нужно поправить форму заявки на сайте..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-large" style="width:100%">Отправить заявку</button>
+          <p class="form-note">🔒 Ваши данные защищены. Мы не передаём их третьим лицам.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / GUARANTEES -->
+  <section id="trust" class="section trust">
+    <div class="container">
+      <h2 class="section-title">Нам доверяют</h2>
+      <p class="section-subtitle">Безопасность и качество — наш приоритет</p>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <h4>✅ Проверенные исполнители</h4>
+          <p>Каждый фрилансер проходит верификацию: портфолио, отзывы, тестовое задание.</p>
+        </div>
+        <div class="trust-card">
+          <h4>🔐 Безопасная сделка</h4>
+          <p>Оплата удерживается в системе и переводится исполнителю только после вашего подтверждения.</p>
+        </div>
+        <div class="trust-card">
+          <h4>💬 Поддержка 24/7</h4>
+          <p>Поможем сформулировать задачу, выбрать исполнителя и решить любые вопросы.</p>
+        </div>
+      </div>
+      <div class="guarantee-badge">
+        <strong>🎁 Специальное предложение:</strong> Первые 50 заказчиков получают скидку 20% на комиссию платформы
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">О проекте</a>
+        <a href="#">Для фрилансеров</a>
+        <a href="#">Помощь</a>
+        <a href="#">Контакты</a>
+      </div>
+      <p>© 2026 TaskIT. Учебный проект по дисциплине «Маркетинг в сфере ИКТ».</p>
+      <p style="margin-top:8px;font-size:12px;opacity:0.8;">Сайт размещён на GitHub Pages для учебных целей.</p>
+    </div>
+  </footer>
+
+  <!-- JS: Обработка формы (демо) -->
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      alert(`✅ Спасибо, ${name}! Ваша заявка принята (демо-режим). В реальном проекте здесь будет отправка на сервер.`);
+      document.getElementById('orderForm').reset();
+    }
+
+    // Плавная прокрутка для якорных ссылок
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
